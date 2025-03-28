@@ -3,6 +3,23 @@
     margin: 0;
     border: 0;
     box-sizing: border-box;
+}
+
+html, body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#quiz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+}
+
+
+#inicio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+}
