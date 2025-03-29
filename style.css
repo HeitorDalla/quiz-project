@@ -1,3 +1,5 @@
+/* Configurações Gerais */
+
 * {
     padding: 0;
     margin: 0;
@@ -6,20 +8,88 @@
 }
 
 html, body {
-    font-family: Arial, Helvetica, sans-serif;
+    font: normal normal 20px arial, sans-serif;
+    height: 100vh;
 }
 
 #quiz {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-flow: column wrap;
 }
 
+/* Configurações do Botão de Iniciar Quiz */
 
 #inicio {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-flow: column wrap;
+}
+
+#iniciarQuiz {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #ccc;
+    transition: transform 0.3s ease;
+}
+
+#iniciarQuiz:hover {
+    transform: scale(1.1);
+    background-color: #b3b3b3;
+}
+
+/* Configurações do container Perguntas */
+
+#perguntas {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(190, 190, 190, 0.178);
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px rgba(187, 187, 187, 0.349);
+}
+
+.pergunta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#perguntas .pergunta #perguntaQuiz {
+    font: normal bold 24px arial, sans-serif;
+    margin-bottom: 20px;
+}
+
+#opcoes {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-flow: column wrap;
+}
+
+#opcoes .opcao {
+    margin: 20px 0 20px 0;
+}
+
+.enviarResposta{
+    background-color: #646464;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: auto;
+}
+
+.enviarResposta:hover {
+    background-color: #414141;
 }
