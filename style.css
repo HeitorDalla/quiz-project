@@ -93,3 +93,42 @@ html, body {
 .enviarResposta:hover {
     background-color: #414141;
 }
+
+/* Configurações do container Resultado */
+
+#resultado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+#resultado #textoResposta {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+#resultado #resposta {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#resultado #resposta .resultado {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 8px 0;
+    font-size: 18px;
+    font-weight: bold;
+    background: #fff;
+}

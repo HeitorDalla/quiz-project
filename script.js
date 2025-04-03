@@ -1,14 +1,14 @@
 "use strict";
 
+const dados = {
+    textoPergunta: null,
+    opcaoSelecionada: null
+}
+
 // Variáveis Globais dos Containers
 const inicio = document.querySelector("#inicio");
 const perguntas = document.querySelector("#perguntas");
 const resultado = document.querySelector("#resultado");
-
-const dados = {
-    textosPerguntas: [],
-    perguntaEscolhida: [],
-};
 
 let perguntaResposta = [
     'Elefante Africano',
@@ -23,41 +23,42 @@ let perguntaResposta = [
     'Canguru'
 ];
 
-const todasPerguntas = [...perguntas.querySelectorAll("#perguntas .pergunta")]; // Vai pegar todas as perguntas
 let indicePergunta = 0; // Vai controlar qual pergunta vai estar sendo exibida
 
 // Funcao para exibir pergunta com base no indice global
 function mostrarPerguntas (indice) {
-    todasPerguntas.forEach((pergunta) => { // Desativar todas as perguntas
+
+    // Vai desativar todas as perguntas
+    const todasPerguntas = [...perguntas.querySelectorAll(".pergunta")];
+    todasPerguntas.forEach((pergunta) => { 
         pergunta.style.display = 'none';
     });
 
-    const perguntaAtual = todasPerguntas[indice];
-
-    // Pegar todos os texto das perguntas
-    const textoPergunta = perguntaAtual.querySelector(".perguntaQuiz");
-    dados.textosPerguntas.push(textoPergunta.textContent);
-    
-    perguntaAtual.style.display = 'block';
+    const perguntaAtual = todasPerguntas[indice]; // Vai pegar o container da pergunta atual
+    perguntaAtual.style.display = 'block'; // Vai fazer aparecer o container da pergunta atual
 
     // Funcionalidades do botao de enviar resposta
     const enviarResposta = perguntaAtual.querySelector(".enviarResposta");
     enviarResposta.addEventListener("click", (event) => {
         event.preventDefault();
 
-        const respostaSelecionada = perguntaAtual.querySelector("input:checked");
+        const textoPergunta = perguntaAtual.querySelector(".perguntaQuiz"); // Pegar o container da pergunta
+        dados.textoPergunta = textoPergunta.textContent; // Adicionar o texto da pergunta dentro do objeto
+
+        const respostaSelecionada = perguntaAtual.querySelector("input:checked"); // Pegar a radio selecionado
 
         // Verificando se foi selecionado uma resposta
         if (respostaSelecionada) {
-            // Adicionando cada resposta que selecionei
-            const textoInputSelecionado = respostaSelecionada.parentElement.textContent.trim();
-            dados.perguntaEscolhida.push(textoInputSelecionado);
+
+            const textoInputSelecionado = respostaSelecionada.parentElement.textContent.trim(); // Pegar o texto de dentro do radio selecionado
+            dados.opcaoSelecionada = textoInputSelecionado; // Adicionar a resposta ao objeto
 
             if (indice < todasPerguntas.length - 1) {
+                contabilizarResultado();
                 indicePergunta ++;
                 mostrarPerguntas(indicePergunta);
-                mostrarResultado();
             } else {
+                contabilizarResultado();
                 resultado.style.display = 'block';
                 perguntaAtual.style.display = 'none';
                 perguntas.style.display = 'none';
@@ -69,17 +70,16 @@ function mostrarPerguntas (indice) {
 };
 
 // Função para mostrar o resultado de todas as perguntas
-function mostrarResultado () {
+function contabilizarResultado () {
     const containerResposta = document.querySelector("#resultado #resposta");
-    containerResposta.innerHTML = '';
 
     const divResultado = document.createElement("div");
     divResultado.setAttribute("class", "resultado")
 
     divResultado.innerHTML = `
-            <p><strong> Pergunta: ${dados.textosPerguntas} </strong></p>
-            <p><strong> Resposta Selecionada: ${dados.perguntaEscolhida} </strong></p>
-            <p><strong> Resposta Correta: ${perguntaResposta} </strong></p>
+            <p> Pergunta: ${dados.textoPergunta} </p>
+            <p> Resposta Selecionada: ${dados.opcaoSelecionada} </p>
+            <p> Resposta Correta: ${perguntaResposta[indicePergunta]} </p>
         `;
     containerResposta.appendChild(divResultado);
 };
@@ -90,8 +90,7 @@ iniciarQuiz.addEventListener("click", (event) => {
     event.preventDefault();
 
     inicio.style.display = 'none'; // Esconde o container inicio
-    perguntas.style.display = 'block'; // Introduso o container das perguntas
+    perguntas.style.display = 'block'; // Introduz o container das perguntas
 
     mostrarPerguntas(indicePergunta); // Vai mostrar a pergunta com base em seu indice
 });
-
