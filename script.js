@@ -88,8 +88,12 @@ function mostrarPerguntas (indice) {
 
 // Função para mostrar o resultado de todas as perguntas
 function contabilizarResultado () {
-    const textoResultado = resultado.querySelector("#textoResposta");
-
+    const textoResposta = resultado.querySelector("#textoResposta");
+    if (dados.acertosErros.quantiadeAcertos >= 7) {
+        textoResposta.textContent = `Parabéns!! Você voi aprovado!! Acertou ${dados.acertosErros.quantiadeAcertos} de 10 questões!`;
+    } else {
+        textoResposta.textContent = `Que pena!! Você foi reprovado. Acertou ${dados.acertosErros.quantiadeAcertos} de 10 questões.`;
+    }
     
     const containerResposta = document.querySelector("#resultado #resposta");
 
