@@ -2,8 +2,12 @@
 
 const dados = {
     textoPergunta: null,
-    opcaoSelecionada: null
-}
+    opcaoSelecionada: null,
+    acertosErros: {
+        quantiadeAcertos: 0,
+        quantidadeErros: 0
+    }
+};
 
 // Variáveis Globais dos Containers
 const inicio = document.querySelector("#inicio");
@@ -54,10 +58,23 @@ function mostrarPerguntas (indice) {
             dados.opcaoSelecionada = textoInputSelecionado; // Adicionar a resposta ao objeto
 
             if (indice < todasPerguntas.length - 1) {
+
+                if (dados.opcaoSelecionada === perguntaResposta[indice]) {
+                    dados.acertosErros.quantiadeAcertos += 1;
+                } else {
+                    dados.acertosErros.quantidadeErros += 1;
+                }
+
                 contabilizarResultado();
                 indicePergunta ++;
                 mostrarPerguntas(indicePergunta);
             } else {
+                if (dados.opcaoSelecionada === perguntaResposta[indice]) {
+                    dados.acertosErros.quantiadeAcertos += 1;
+                } else {
+                    dados.acertosErros.quantidadeErros += 1;
+                }
+
                 contabilizarResultado();
                 resultado.style.display = 'block';
                 perguntaAtual.style.display = 'none';
@@ -71,6 +88,9 @@ function mostrarPerguntas (indice) {
 
 // Função para mostrar o resultado de todas as perguntas
 function contabilizarResultado () {
+    const textoResultado = resultado.querySelector("#textoResposta");
+
+    
     const containerResposta = document.querySelector("#resultado #resposta");
 
     const divResultado = document.createElement("div");
